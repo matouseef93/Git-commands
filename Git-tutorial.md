@@ -10,3 +10,24 @@ The following steps work for an Ubuntu machine. However, the procedure (order of
 ```bash
 $ sudo apt-get install git
 ```
+2. Next you will have to download the repository on which you are going to work. By default it downloads the last revision ("HEAD").
+```bash
+$ git clone https://github.com/miguelgfierro/codebase
+```
+3. As you generate content, it is not "added" to the repository. When checking the status of git by typing:
+```bash
+$ git status
+# On branch master  **<-- This is the branch you are currently in**
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   README.md  <--  Este es el archivo que se ha modificado
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	fichero.cpp <--  Este es el archivo nuevo que se ha creado
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+```
