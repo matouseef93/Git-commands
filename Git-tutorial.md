@@ -1,0 +1,1 @@
+This is a basic tutorial of git. A more advanced one can be found [here](http://git-scm.com/book).
