@@ -57,6 +57,8 @@ $ git status
 ```bash
 $ git commit -m "I have improved my Git level!"
 ```
+*Tips and tricks: You can do `$ git commit -a -m = "I have improved my Git level!"`, this also uploads files marked as modified, without having to re-do `git add`*.
+
 7. Finally you have to upload the changes to the global repository. In order to do this the administrator has to give you permission. You are going to push to branch `master`, which is the initial branch available when the repo is created.
 ```bash
 $ git push origin master
@@ -72,4 +74,73 @@ Initial settings to enter your name and email (git will advise if necessary). To
 $ git config --global user.name "Mitch Buchannon"
 $ git config --global user.email iammitchbuchannon@users.noreply.github.com
 ```
-*Tips and tricks: the alias `your-github-username@users.noreply.github.com` is a the default hidden email in Github*.
+*Tips and tricks: the alias `your-github-username@users.noreply.github.com` is a your default hidden email in Github*.
+
+To configure your user in a single repository:
+```bash
+$ git config user.name "Mitch Buchannon"
+$ git config user.email iammitchbuchannon@users.noreply.github.com
+```
+To view the user and email configured in the repository:
+```bash
+$ git config user.name
+$ git config user.email
+```
+
+## Basic management of branches
+
+The branches are used to develop in parallel to the main repository. When you create a new functionality in the code, you should create a branch. Then you develop the functionality, test it and when it **works perfectly** is integrated into the main branch (which is usually the master branch).
+
+*Tips and tricks: In master there should always be working code, please don't be the guy who sends breaking code to master, karma will hunt you!*
+
+1. View the state of the branches
+```bash
+$ git branch  <-- This tells you the branches in your local repository
+$ git branch -a  <-- It tells you the branches in local and global repositories (listed as remotes/origin/...)
+$ git fetch -p  <-- Update the list of branches taking into account remote branches deleted by other people
+```
+2. Create and upload/download a branch
+```bash
+$ git branch testing <-- Create a new branch in the local repository called testing 
+$ git checkout testing <-- Change from the current branch to testing branch (can be done whenever you want to change branches)
+$ git add new_file.cpp <-- We add a new file in the testing branch
+$ git commit -m "added new_file.cpp to the testing branch" <-- commit local repository
+$ git push origin testing <-- upload changes to the global repository (if you are prompted to do something else, do so)
+$ git pull origin testing <-- you can download the latest changes from the global repository to your computer
+
+3. If you want to merge a branch (eg testing) with the master branch 
+```bash
+$ git checkout master <-- changes from the current branch to the master branch
+$ git merge testing <-- merge the testing branch with the main
+```
+4. Delete a branch (eg testing, which would make sense after the merge) you have to do the next two steps
+```bash
+$ git branch -d testing <-- locally clears the testing branch
+$ git push origin --delete testing <-- delete the testing branch in the global repository
+```
+5. Another good practice is to tag locate an important point of your code is to make a "tag". Tipically this is done when you want to make a release.
+```bash
+$ git tag <-- shows a list of all tags
+$ git show v1.0 <-- shows detailed tag information called v1.0
+$ git tag -a v1.0 -m "my tag v1.0" <-- creates a tag named v1.0 in the local repository
+$ git push origin v1.0 <-- upload the tag to the remote server
+```
+## Other commands
+
+```bash
+$ git diff-> shows differences between a modified file and one that has been modified before but is stagged, i.e. it is in the local repository.
+$ git diff --cached <-- differences between a modified file and the same file saved in the HEAD
+$ git rm file.txt <-- delete a file
+$ git mv file.txt new_file.txt <-- rename a file
+$ git log <-- view commit history
+$ git log --since = 2.weeks <-- view commit history from 2 weeks ago
+$ git config --global alias.ci commit <-- alias for not having to type `git commit` and just do `git ci`
+$ git config --global alias.st status <-- alias not to have to type `git status` and just do `git st`
+$ git config --global core.excludesfile ~ / .gitignore <-- within `.gitignore` you list the files to be ignored
+$ git config --global credential.helper cache <-- save your password in cache for 15 min, so you do not have to write it over and over again
+$ git config --global credential.helper 'cache --timeout = 3600' <-- save your password for one hour
+$ git rev-list HEAD --count <-- allows you to see the total number of commits
+$ git shortlog -sne <-- allows to see the number of commits of each developer
+$ git fetch origin <-- this command along with the one below removes all local changes and sets the server version.
+$ git reset --hard origin / master
+```
