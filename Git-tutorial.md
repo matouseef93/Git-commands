@@ -17,17 +17,59 @@ $ git clone https://github.com/miguelgfierro/codebase
 3. As you generate content, it is not "added" to the repository. When checking the status of git by typing:
 ```bash
 $ git status
-# On branch master  **<-- This is the branch you are currently in**
+# On branch master  <-- This is the branch you are currently in
 # Changes not staged for commit:
 #   (use "git add <file>..." to update what will be committed)
 #   (use "git checkout -- <file>..." to discard changes in working directory)
 #
-#	modified:   README.md  <--  Este es el archivo que se ha modificado
+#	modified:   README.md  <--  This is the modified file
 #
 # Untracked files:
 #   (use "git add <file>..." to include in what will be committed)
 #
-#	fichero.cpp <--  Este es el archivo nuevo que se ha creado
+#	file.cpp <--  This is the new file created
 #
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
+4.a. You can add a file:
+```bash
+$ git add file.cpp
+```
+4.b. Or only the latest modifications to previously added files:
+```bash
+$ git add -u
+```
+4.c. Or all files added and modified:
+```bash
+$ git add .
+```
+5. Looking at the status you will see that:
+```bash
+$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   README.md
+#	new file:   file.cpp
+```
+6. Now you have to upload everything to the local repository that is on the computer itself. This is an intermediate repository between your computer and the global repository.
+```bash
+$ git commit -m "I have improved my Git level!"
+```
+7. Finally you have to upload the changes to the global repository. In order to do this the administrator has to give you permission. You are going to push to branch `master`, which is the initial branch available when the repo is created.
+```bash
+$ git push origin master
+```
+8. To download the latest version of the server:
+```bash
+$ git pull origin master
+```
+## Git configurations
+
+Initial settings to enter your name and email (git will advise if necessary). To configure your user in all PC repositories:
+```bash
+$ git config --global user.name "Mitch Buchannon"
+$ git config --global user.email iammitchbuchannon@users.noreply.github.com
+```
+*Tips and tricks: the alias `your-github-username@users.noreply.github.com` is a the default hidden email in Github*.
