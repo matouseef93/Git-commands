@@ -126,9 +126,10 @@ $ git tag -a v1.0 -m "my tag v1.0" <-- creates a tag named v1.0 in the local rep
 $ git push origin v1.0 <-- upload the tag to the remote server
 ```
 ## Other commands
+Next a list of useful commands:
 
 ```bash
-$ git diff-> shows differences between a modified file and one that has been modified before but is stagged, i.e. it is in the local repository.
+$ git diff <-- shows differences between a modified file and one that has been modified before but is stagged, i.e. it is in the local repository.
 $ git diff --cached <-- differences between a modified file and the same file saved in the HEAD
 $ git rm file.txt <-- delete a file
 $ git mv file.txt new_file.txt <-- rename a file
@@ -144,3 +145,5 @@ $ git shortlog -sne <-- allows to see the number of commits of each developer
 $ git fetch origin <-- this command along with the one below removes all local changes and sets the server version.
 $ git reset --hard origin / master
 ```
+
+Happy gitting!
