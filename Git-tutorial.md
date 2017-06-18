@@ -71,15 +71,15 @@ $ git pull origin master
 
 Initial settings to enter your name and email (git will advise if necessary). To configure your user in all PC repositories:
 ```bash
-$ git config --global user.name "Mitch Buchannon"
-$ git config --global user.email iammitchbuchannon@users.noreply.github.com
+$ git config --global user.name "Bruce Wayne"
+$ git config --global user.email iambatman@users.noreply.github.com
 ```
 *Tips and tricks: the alias `your-github-username@users.noreply.github.com` is a your default hidden email in Github*.
 
 To configure your user in a single repository:
 ```bash
-$ git config user.name "Mitch Buchannon"
-$ git config user.email iammitchbuchannon@users.noreply.github.com
+$ git config user.name "Bruce Wayne"
+$ git config user.email iambatman@users.noreply.github.com
 ```
 To view the user and email configured in the repository:
 ```bash
@@ -125,6 +125,53 @@ $ git show v1.0 <-- shows detailed tag information called v1.0
 $ git tag -a v1.0 -m "my tag v1.0" <-- creates a tag named v1.0 in the local repository
 $ git push origin v1.0 <-- upload the tag to the remote server
 ```
+6. In some situations there can be conflicts. A conflict occurs when two developers have modified the same file at the same time and then server doesn't know which is the final version of the file. The conflicts usually appear after pulling a branch and are visible when you see the status:
+```bash
+# On branch master
+# You have unmerged paths.
+#   (fix conflicts and run "git commit")
+#
+# Unmerged paths:
+#   (use "git add ..." to mark resolution)
+#
+# both modified:      file.cpp
+```
+To solve this you can open the file and manually fix the conflicts. Alternatively, you could choose to maintain the version of the global server
+```bash
+git checkout --theirs file.cpp
+```
+or you choose your local version
+```bash
+git checkout --ours file.cpp
+```
+7. A good way to avoid conflicts when developing in branches is to [rebase](https://git-scm.com/book/en/v2/Git-Branching-Rebasing). Put in simple words, when rebasing you are telling git to automatically solve the conflicts generated when two developers are modifying the same file locally, with a not up-to-date repo version. This behavior typically appears when you pull the last changes of a repo and another developer has modified a file at the same time. To avoid this conflict, you can rebase when pulling:
+```bash
+git pull --rebase origin master
+```  
+
+## Roll back to a previos version of the repo
+In git is easy to roll back to a previous version of your repo, for that we only need the identifier of the commit. First we need to find the commit we want to roll back:
+```bash
+$ git log
+# commit 8af5d69e4bbc9aec8b5e268e2ba94c49fbffee37 <- this is the commit hash
+# Author: Miguel Fierro <miguelgfierro@users.noreply.github.com>
+# Date:   Fri Jun 16 08:27:17 2017 +0100
+#
+#     clean string js fix #76
+# commit 8168c0c18c28488b0d1cf12c98f93ebc4f1e40e1
+# Author: Miguel Fierro <miguelgfierro@users.noreply.github.com>
+# Date:   Fri Jun 16 08:21:20 2017 +0100
+#
+```
+To roll back to a specific commit:
+```bash
+git checkout 8af5d69e4bbc9aec8b5e268e2ba94c49fbffee37 
+```
+In case you have a repo with submodules, which are different subrepos whithin the main repo ([more info here](https://git-scm.com/book/en/v2/Git-Tools-Submodules)), you need to update them:
+```bash
+git submodule update --recursive
+```
+
 ## Other commands
 Next a list of useful commands:
 
@@ -143,7 +190,7 @@ $ git config --global credential.helper 'cache --timeout = 3600' <-- save your p
 $ git rev-list HEAD --count <-- allows you to see the total number of commits
 $ git shortlog -sne <-- allows to see the number of commits of each developer
 $ git fetch origin <-- this command along with the one below removes all local changes and sets the server version.
-$ git reset --hard origin / master
+$ git reset --hard origin/master
 ```
 
 Happy gitting!
