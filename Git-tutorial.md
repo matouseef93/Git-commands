@@ -107,7 +107,7 @@ $ git add new_file.cpp <-- We add a new file in the testing branch
 $ git commit -m "added new_file.cpp to the testing branch" <-- commit local repository
 $ git push origin testing <-- upload changes to the global repository (if you are prompted to do something else, do so)
 $ git pull origin testing <-- you can download the latest changes from the global repository to your computer
-
+```
 3. If you want to merge a branch (eg testing) with the master branch 
 ```bash
 $ git checkout master <-- changes from the current branch to the master branch
