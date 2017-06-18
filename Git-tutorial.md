@@ -2,17 +2,22 @@ This is a basic tutorial of git. A more advanced one can be found [here](http://
 
 Git is a version control software designed by Linus Torvalds, designed with the efficiency and reliability of maintaining application versions when there is a large number of source files. At first, Git was thought of as a low-level engine on which others could write the user interface or front end. However, Git has since become a fully functional version control system. There are some very relevant projects that already use Git, in particular, the [Linux kernel](https://github.com/torvalds/linux).
 
-## Git Tutorial for Ubuntu
+## Begin from the beginning
 
-The following steps work for an Ubuntu machine. However, the procedure (order of operations) is the same for any other Distribution or Operating System.
+The first step is to be able to download a repository, add files and send these files back to the repository.
 
-1. The first thing is to install a Git client. Here I opted for the most basic, the text interface.
+1. The first thing is to install a Git client. This is the instruction for Ubuntu, but you can install them in [other operating systems](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git). 
 ```bash
 $ sudo apt-get install git
 ```
-2. Next you will have to download the repository on which you are going to work. By default it downloads the last revision ("HEAD").
+2.a. Next you will have to download the repository on which you are going to work. By default it downloads the last revision ("HEAD").
 ```bash
 $ git clone https://github.com/miguelgfierro/codebase
+```
+2.b. Alternatively, you can create a new repository. 
+```bash
+cd /path/to/your/folder
+git init
 ```
 3. As you generate content, it is not "added" to the repository. When checking the status of git by typing:
 ```bash
@@ -127,6 +132,7 @@ $ git push origin v1.0 <-- upload the tag to the remote server
 ```
 6. In some situations there can be conflicts. A conflict occurs when two developers have modified the same file at the same time and then server doesn't know which is the final version of the file. The conflicts usually appear after pulling a branch and are visible when you see the status:
 ```bash
+$ git status
 # On branch master
 # You have unmerged paths.
 #   (fix conflicts and run "git commit")
@@ -138,15 +144,15 @@ $ git push origin v1.0 <-- upload the tag to the remote server
 ```
 To solve this you can open the file and manually fix the conflicts. Alternatively, you could choose to maintain the version of the global server
 ```bash
-git checkout --theirs file.cpp
+$ git checkout --theirs file.cpp
 ```
 or you choose your local version
 ```bash
-git checkout --ours file.cpp
+$ git checkout --ours file.cpp
 ```
 7. A good way to avoid conflicts when developing in branches is to [rebase](https://git-scm.com/book/en/v2/Git-Branching-Rebasing). Put in simple words, when rebasing you are telling git to automatically solve the conflicts generated when two developers are modifying the same file locally, with a not up-to-date repo version. This behavior typically appears when you pull the last changes of a repo and another developer has modified a file at the same time. To avoid this conflict, you can rebase when pulling:
 ```bash
-git pull --rebase origin master
+$ git pull --rebase origin master
 ```  
 
 ## Roll back to a previos version of the repo
