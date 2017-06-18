@@ -17,7 +17,7 @@ $ git clone https://github.com/miguelgfierro/codebase
 2.b. Alternatively, you can create a new repository. 
 ```bash
 cd /path/to/your/folder
-git init
+$ git init
 ```
 3. As you generate content, it is not "added" to the repository. When checking the status of git by typing:
 ```bash
