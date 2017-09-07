@@ -126,9 +126,9 @@ git push origin --delete testing <-- delete the testing branch in the global rep
 5. Another good practice is to tag locate an important point of your code is to make a "tag". Tipically this is done when you want to make a release.
 ```bash
 git tag <-- shows a list of all tags
-git show v1.0 <-- shows detailed tag information called v1.0
-git tag -a v1.0 -m "my tag v1.0" <-- creates a tag named v1.0 in the local repository
-git push origin v1.0 <-- upload the tag to the remote server
+git show 1.0 <-- shows detailed tag information called v1.0
+git tag -a 1.0 -m "version 1.0: first release" <-- creates a tag named v1.0 in the local repository
+git push origin 1.0 <-- upload the tag to the remote server
 ```
 6. In some situations there can be conflicts. A conflict occurs when two developers have modified the same file at the same time and then server doesn't know which is the final version of the file. The conflicts usually appear after pulling a branch and are visible when you see the status:
 ```bash
