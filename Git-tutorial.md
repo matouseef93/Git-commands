@@ -154,6 +154,13 @@ git checkout --ours file.cpp
 ```bash
 git pull --rebase origin master
 ```  
+8. Sometimes you have modified files in a branch, but you would like to [move these changes](https://stackoverflow.com/questions/7217894/moving-changed-files-to-another-branch-for-check-in/7218106) to a different branch. Using `git stash` you can save your changes locally, switch the branch and make the changes available again.  
+```bash
+git stash
+# Saved working directory and index state WIP on master: 654088c message of the previous commit
+git checkout new_branch
+git stash pop
+```
 
 ## Roll back to a previos version of the repo
 In git is easy to roll back to a previous version of your repo, for that we only need the identifier of the commit. First we need to find the commit we want to roll back:
