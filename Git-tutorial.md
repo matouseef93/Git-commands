@@ -185,6 +185,32 @@ In case you have a repo with submodules, which are different subrepos whithin th
 git submodule update --recursive
 ```
 
+## Statistics
+Statistics of commits:
+```bash
+git rev-list HEAD --count <-- allows you to see the total number of commits
+git shortlog -sne <-- allows to see the number of commits of each developer
+```
+Count number of lines. Some of the following statistics are computed with [CLOC](https://github.com/AlDanial/cloc) using `npm install -g cloc`. An alternative to CLOC is [linguistic](https://github.com/github/linguist), which is the library used by GitHub to get code statistics:
+```bash
+git ls-files | xargs cat | wc -l <-- total number of lines (including comments)
+git ls-files | xargs wc -l <-- number of lines per file
+cloc --vcs=git <-- number of files and code statistics (code, blanks and comments)
+cloc --git --diff b35dfc0866bce3bcf284b9eeecf3fa50b54a9691 HEAD <- differences in code statistics of a commit and current master
+```
+Statistics of number of lines per developer:
+```bash
+git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git log --author="$name" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }' -; done
+```
+Show the number of added, removed and total lines:
+```bash
+git log  --pretty=tformat: --numstat | awk '{ add += $1 ; subs += $2 ; loc += $1 - $2 } END { printf "added lines: %s removed lines: %s total lines: %s\n",add,subs,loc }'
+```
+Show an sorted list of the repo elements with their size and commit
+```bash
+git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | awk '/^blob/ {print substr($0,6)}' | sort --numeric-sort --key=2 | cut --complement --characters=13-40 | numfmt --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest
+```
+
 ## Other commands
 Next a list of useful commands:
 
@@ -204,22 +230,6 @@ git config --global credential.helper 'cache --timeout=3600' <-- save your passw
 git fetch origin <-- this command along with the one below removes all local changes and sets the server version.
 git reset --hard origin/master
 ```
-Statistics of commits:
-```bash
-git rev-list HEAD --count <-- allows you to see the total number of commits
-git shortlog -sne <-- allows to see the number of commits of each developer
-```
-Statistics of number of lines per developer:
-```bash
-git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git log --author="$name" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }' -; done
-```
-Show the number of added, removed and total lines:
-```bash
-git log  --pretty=tformat: --numstat | awk '{ add += $1 ; subs += $2 ; loc += $1 - $2 } END { printf "added lines: %s removed lines: %s total lines: %s\n",add,subs,loc }'
-```
-Show an sorted list of the repo elements with their size and commit
-```bash
-git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | awk '/^blob/ {print substr($0,6)}' | sort --numeric-sort --key=2 | cut --complement --characters=13-40 | numfmt --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest
-```
+
 
 Happy gitting!
