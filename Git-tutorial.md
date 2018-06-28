@@ -150,7 +150,7 @@ or you choose your local version
 ```bash
 git checkout --ours file.cpp
 ```
-7. A good way to avoid conflicts when developing in branches is to [rebase](https://git-scm.com/book/en/v2/Git-Branching-Rebasing). Put in simple words, when rebasing you are telling git to automatically solve the conflicts generated when two developers are modifying the same file locally, with a not up-to-date repo version. This behavior typically appears when you pull the last changes of a repo and another developer has modified a file at the same time. To avoid this conflict, you can rebase when pulling:
+7. A good way to avoid conflicts when developing in branches is to [rebase](https://git-scm.com/book/en/v2/Git-Branching-Rebasing). Put in simple words, when rebasing you are telling git to automatically solve the conflicts generated when two developers are modifying the same file locally, with a not up-to-date repo version. This behavior typically appears when you pull the last changes of a repo and another developer has modified a file at the same time. A nice explanation can be found [here](https://gist.github.com/leesmith/8441773). To avoid this conflict, you can rebase when pulling:
 ```bash
 git pull --rebase origin master
 ```  
