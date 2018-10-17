@@ -123,7 +123,11 @@ git merge testing <-- merge the testing branch with the main
 git branch -d testing <-- locally clears the testing branch
 git push origin --delete testing <-- delete the testing branch in the global repository
 ```
-5. Another good practice is to tag locate an important point of your code is to make a "tag". Tipically this is done when you want to make a release.
+When working with branches, many times you have lots of local branches that have been already merged in remote, but you still have them in local. To [delete them](https://stackoverflow.com/questions/7726949/remove-tracking-branches-no-longer-on-remote/28464339#28464339) (with a file review before you delete them):
+```bash
+git branch --merged >/tmp/merged-branches && vi /tmp/merged-branches && xargs git branch -d </tmp/merged-branches
+```
+5. Another good practice is to tag locate an important point of your code is to make a "tag". Typically this is done when you want to make a release.
 ```bash
 git tag <-- shows a list of all tags
 git show 1.0 <-- shows detailed tag information called v1.0
