@@ -224,7 +224,7 @@ git diff --cached <-- differences between a modified file and the same file save
 git rm file.txt <-- delete a file
 git mv file.txt new_file.txt <-- rename a file
 git log <-- view commit history
-git log --since = 2.weeks <-- view commit history from 2 weeks ago
+git log --since=2.weeks <-- view commit history from 2 weeks ago
 git log --reverse <-- view the commit history in reverse order, starting with the first commit
 git config --global alias.ci commit <-- alias for not having to type `git commit` and just do `git ci`
 git config --global alias.st status <-- alias not to have to type `git status` and just do `git st`
