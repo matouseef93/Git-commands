@@ -190,6 +190,9 @@ git submodule update --recursive
 ```
 
 ## Statistics
+
+This [script](python/utilities/git_stats.py) has several statistics for GitHub repos.
+
 Statistics of commits:
 ```bash
 git rev-list HEAD --count <-- allows you to see the total number of commits
@@ -213,6 +216,10 @@ git log  --pretty=tformat: --numstat | awk '{ add += $1 ; subs += $2 ; loc += $1
 Show an sorted list of the repo elements with their size and commit
 ```bash
 git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | awk '/^blob/ {print substr($0,6)}' | sort --numeric-sort --key=2 | cut --complement --characters=13-40 | numfmt --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest
+```
+Other statistics:
+```
+git ls-remote --heads origin | wc -l <-- number of active branches
 ```
 
 ## Other commands
