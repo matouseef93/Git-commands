@@ -238,6 +238,7 @@ git config --global alias.st status <-- alias not to have to type `git status` a
 git config --global core.excludesfile ~ / .gitignore <-- within `.gitignore` you list the files to be ignored
 git config --global credential.helper cache <-- save your password in cache for 15 min, so you do not have to write it over and over again
 git config --global credential.helper 'cache --timeout=3600' <-- save your password for one hour
+git revert <commit hash> <-- Reverts a commit hash
 git fetch origin <-- this command along with the one below removes all local changes and sets the server version.
 git reset --hard origin/master
 ```
