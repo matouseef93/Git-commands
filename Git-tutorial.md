@@ -22,7 +22,7 @@ git init
 3. As you generate content, it is not "added" to the repository. When checking the status of git by typing:
 ```bash
 git status
-# On branch master  <-- This is the branch you are currently in
+# On branch main  <-- This is the branch you are currently in
 # Changes not staged for commit:
 #   (use "git add <file>..." to update what will be committed)
 #   (use "git checkout -- <file>..." to discard changes in working directory)
@@ -51,7 +51,7 @@ git add .
 5. Looking at the status you will see that:
 ```bash
 git status
-# On branch master
+# On branch main
 # Changes to be committed:
 #   (use "git reset HEAD <file>..." to unstage)
 #
@@ -64,13 +64,13 @@ git commit -m "I have improved my Git level!"
 ```
 *Tips and tricks: You can do `$ git commit -a -m = "I have improved my Git level!"`, this also uploads files marked as modified, without having to re-do `git add`*.
 
-7. Finally you have to upload the changes to the global repository. In order to do this, the administrator has to give you permission. You are going to push to branch `master`, which is the initial branch available when the repo is created.
+7. Finally you have to upload the changes to the global repository. In order to do this, the administrator has to give you permission. You are going to push to branch `main`, which is the initial branch available when the repo is created.
 ```bash
-git push origin master
+git push origin main
 ```
 8. To download the latest version of the server:
 ```bash
-git pull origin master
+git pull origin main
 ```
 ## Git configurations
 
@@ -94,9 +94,9 @@ git config user.email
 
 ## Basic management of branches
 
-The branches are used to develop in parallel to the main repository. When you create new functionality in the code, you should create a branch. Then you develop the functionality, test it and when it **works perfectly** is integrated into the main branch (which is usually the master branch).
+The branches are used to develop in parallel to the main repository. When you create new functionality in the code, you should create a branch. Then you develop the functionality, test it and when it **works perfectly** is integrated into the default branch (which is usually the main branch).
 
-*Tips and tricks: In master there should always be working code, please don't be the guy who sends breaking code to master, karma will hunt you!*
+*Tips and tricks: In main, there should always be working code, please don't be the guy who sends breaking code into main, karma will hunt you!*
 
 1. View the state of the branches
 ```bash
@@ -113,9 +113,9 @@ git commit -m "added new_file.cpp to the testing branch" <-- commit local reposi
 git push origin testing <-- upload changes to the global repository (if you are prompted to do something else, do so)
 git pull origin testing <-- you can download the latest changes from the global repository to your computer
 ```
-3. If you want to merge a branch (eg testing) with the master branch 
+3. If you want to merge a branch (eg testing) with the main branch 
 ```bash
-git checkout master <-- changes from the current branch to the master branch
+git checkout main<-- changes from the current branch to the main branch
 git merge testing <-- merge the testing branch with the main
 ```
 4. Delete a branch (eg testing, which would make sense after the merge) you have to do the next two steps
@@ -137,7 +137,7 @@ git push origin 1.0 <-- upload the tag to the remote server
 6. In some situations there can be conflicts. A conflict occurs when two developers have modified the same file at the same time and then server doesn't know which is the final version of the file. The conflicts usually appear after pulling a branch and are visible when you see the status:
 ```bash
 git status
-# On branch master
+# On branch main
 # You have unmerged paths.
 #   (fix conflicts and run "git commit")
 #
@@ -156,12 +156,12 @@ git checkout --ours file.cpp
 ```
 7. A good way to avoid conflicts when developing in branches is to [rebase](https://git-scm.com/book/en/v2/Git-Branching-Rebasing). Put in simple words, when rebasing you are telling git to automatically solve the conflicts generated when two developers are modifying the same file locally, with a not up-to-date repo version. This behavior typically appears when you pull the last changes of a repo and another developer has modified a file at the same time. A nice explanation can be found [here](https://gist.github.com/leesmith/8441773). To avoid this conflict, you can rebase when pulling:
 ```bash
-git pull --rebase origin master
+git pull --rebase origin main
 ```  
 8. Sometimes you have modified files in a branch, but you would like to [move these changes](https://stackoverflow.com/questions/7217894/moving-changed-files-to-another-branch-for-check-in/7218106) to a different branch. Using `git stash` you can save your changes locally, switch the branch and make the changes available again.  
 ```bash
 git stash
-# Saved working directory and index state WIP on master: 654088c message of the previous commit
+# Saved working directory and index state WIP on main: 654088c message of the previous commit
 git checkout new_branch
 git stash pop
 ```
@@ -203,7 +203,7 @@ Count number of lines. Some of the following statistics are computed with [CLOC]
 git ls-files | xargs cat | wc -l <-- total number of lines (including comments)
 git ls-files | xargs wc -l <-- number of lines per file
 cloc --vcs=git <-- number of files and code statistics (code, blanks and comments)
-cloc --git --diff b35dfc0866bce3bcf284b9eeecf3fa50b54a9691 HEAD <- differences in code statistics of a commit and current master
+cloc --git --diff b35dfc0866bce3bcf284b9eeecf3fa50b54a9691 HEAD <- differences in code statistics of a commit and current main
 ```
 Statistics of number of lines per developer:
 ```bash
@@ -240,7 +240,7 @@ git config --global credential.helper cache <-- save your password in cache for 
 git config --global credential.helper 'cache --timeout=3600' <-- save your password for one hour
 git revert <commit hash> <-- Reverts a commit hash
 git fetch origin <-- this command along with the one below removes all local changes and sets the server version.
-git reset --hard origin/master
+git reset --hard origin/main
 ```
 
 
