@@ -76,21 +76,40 @@ git pull origin main
 
 Initial settings to enter your name and email (git will advise if necessary). To configure your user in all PC repositories:
 ```bash
-git config --global user.name "Bruce Wayne"
-git config --global user.email iambatman@users.noreply.github.com
+git config user.name "Your name"
+git config user.email your_email@example.com
 ```
 *Tips and tricks: the alias `your-github-username@users.noreply.github.com` is your default hidden email in GitHub*.
 
 To configure your user in a single repository:
 ```bash
-git config user.name "Bruce Wayne"
-git config user.email iambatman@users.noreply.github.com
+git config user.name "Your name"
+git config user.email your_email@example.com
 ```
 To view the user and email configured in the repository:
 ```bash
 git config user.name
 git config user.email
 ```
+
+## Managing repos with ssh keys
+
+For higher security, the recommended approach to clone and manage repos is via [SSH keys](https://docs.github.com/en/github/authenticating-to-github/about-ssh). Using the SSH protocol, you can connect and authenticate to remote servers and services. With SSH keys, you can connect to GitHub without supplying your username and personal access token at each visit.
+
+1. Open a terminal
+2. Generate a new ssh key
+```bash
+ssh-keygen -t ed25519 -C your_email@example.com
+```
+3. Copy the SSH key in that path you saved it
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+4. Go to your GitHub profile, press Settings, press SSH and GPG Keys and add a New SSH key, and copy the SSH key there.
+5. From now on, you can clone the repositories via SSH
+```bash
+git clone git@github.com:miguelgfierro/codebase.git
+``` 
 
 ## Basic management of branches
 
@@ -226,20 +245,22 @@ git ls-remote --heads origin | wc -l <-- number of active branches
 Next a list of useful commands:
 
 ```bash
-git diff <-- shows differences between a modified file and one that has been modified before but is stagged, i.e. it is in the local repository.
-git diff --cached <-- differences between a modified file and the same file saved in the HEAD
-git rm file.txt <-- delete a file
-git mv file.txt new_file.txt <-- rename a file
-git log <-- view commit history
-git log --since=2.weeks <-- view commit history from 2 weeks ago
-git log --reverse <-- view the commit history in reverse order, starting with the first commit
-git config --global alias.ci commit <-- alias for not having to type `git commit` and just do `git ci`
-git config --global alias.st status <-- alias not to have to type `git status` and just do `git st`
-git config --global core.excludesfile ~ / .gitignore <-- within `.gitignore` you list the files to be ignored
-git config --global credential.helper cache <-- save your password in cache for 15 min, so you do not have to write it over and over again
-git config --global credential.helper 'cache --timeout=3600' <-- save your password for one hour
-git revert <commit hash> <-- Reverts a commit hash
-git fetch origin <-- this command along with the one below removes all local changes and sets the server version.
+git diff   # shows differences between a modified file and one that has been modified before but is stagged, i.e. it is in the local repository.
+git diff --cached   # differences between a modified file and the same file saved in the HEAD
+git rm file.txt   # delete a file
+git mv file.txt new_file.txt   # rename a file
+git log   # view commit history
+git log --since=2.weeks   # view commit history from 2 weeks ago
+git log --reverse   # view the commit history in reverse order, starting with the first commit
+git config --global alias.ci commit   # alias for not having to type `git commit` and just do `git ci`
+git config --global alias.st status   # alias not to have to type `git status` and just do `git st`
+git config --global alias.sub "submodule update --remote --merge"   # alias to for using `git sub` to pull a submodule in a repo
+git config --global core.excludesfile ~ / .gitignore   # within `.gitignore` you list the files to be ignored
+git config --global credential.helper cache   # save your https password in cache for 15 min, so you do not have to write it over and over again
+git config --global credential.helper 'cache --timeout=3600'   # save your password for one hour
+git revert <commit hash>   # Reverts a commit hash
+# the following two commands remove all local changes and sets the server version
+git fetch origin   
 git reset --hard origin/main
 ```
 
