@@ -208,6 +208,39 @@ In case you have a repo with submodules, which are different subrepos within the
 git submodule update --remote --merge
 ```
 
+## Using SSH keys with different GitHub accounts
+
+1. Generate a pair of SSH keys. You will be asked to enter a filename
+```
+$ ssh-keygen -t ed25519 -C your_personal_email@example.com
+Enter file in which to save the key (~/.ssh/id_ed25519): ~/.ssh/ssh_personal
+$ ssh-keygen -t ed25519 -C your_work_email@example.com
+Enter file in which to save the key (~/.ssh/id_ed25519): ~/.ssh/ssh_work
+```
+2. Copy the SSH key in that path you saved it
+```bash 
+$ cat ~/.ssh/ssh_personal.pub
+$ cat ~/.ssh/ssh_work.pub
+```
+3. Go to each of the GitHub profiles, press Settings, press SSH and GPG Keys and add a New SSH key, and copy the SSH key there.
+4. In `~/.ssh/config` add:
+```
+Host personal
+HostName github.com
+User git
+IdentityFile ~/.ssh/ssh_personal
+
+Host work
+HostName github.com
+User git
+IdentityFile ~/.ssh/ssh_work
+```
+5. Clone each repo using the host instead of `gitub.com` in `git@github.com:miguelgfierro/codebase.git`
+```
+$ git clone git@personal:miguelgfierro/codebase.git
+$ git clone git@work:miguelgfierro/codebase.git
+```
+
 ## Statistics
 
 This [script](python/utilities/git_stats.py) has several statistics for GitHub repos.
