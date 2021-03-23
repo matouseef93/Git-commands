@@ -22,17 +22,17 @@ git init
 3. As you generate content, it is not "added" to the repository. When checking the status of git by typing:
 ```bash
 git status
-# On branch main  <-- This is the branch you are currently in
+# On branch main   # This is the branch you are currently in
 # Changes not staged for commit:
 #   (use "git add <file>..." to update what will be committed)
 #   (use "git checkout -- <file>..." to discard changes in working directory)
 #
-#	modified:   README.md  <--  This is the modified file
+#	modified:   README.md   # This is the modified file
 #
 # Untracked files:
 #   (use "git add <file>..." to include in what will be committed)
 #
-#	file.cpp <--  This is the new file created
+#	file.cpp   # This is the new file created
 #
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
@@ -62,7 +62,7 @@ git status
 ```bash
 git commit -m "I have improved my Git level!"
 ```
-*Tips and tricks: You can do `$ git commit -a -m = "I have improved my Git level!"`, this also uploads files marked as modified, without having to re-do `git add`*.
+*Tips and tricks: You can do `$ git commit -a -m = "I have improved my git level!"`, this also uploads files marked as modified, without having to re-do `git add`*.
 
 7. Finally you have to upload the changes to the global repository. In order to do this, the administrator has to give you permission. You are going to push to branch `main`, which is the initial branch available when the repo is created.
 ```bash
@@ -119,28 +119,28 @@ The branches are used to develop in parallel to the main repository. When you cr
 
 1. View the state of the branches
 ```bash
-git branch  <-- This tells you the branches in your local repository
-git branch -a  <-- It tells you the branches in local and global repositories (listed as remotes/origin/...)
-git fetch -p  <-- Update the list of branches taking into account remote branches deleted by other people
+git branch   # This tells you the branches in your local repository
+git branch -a   # It tells you the branches in local and global repositories (listed as remotes/origin/...)
+git fetch -p   # Update the list of branches taking into account remote branches deleted by other people
 ```
 2. Create and upload/download a branch
 ```bash
-git branch testing <-- Create a new branch in the local repository called testing 
-git checkout testing <-- Change from the current branch to testing branch (can be done whenever you want to change branches)
-git add new_file.cpp <-- We add a new file in the testing branch
-git commit -m "added new_file.cpp to the testing branch" <-- commit local repository
-git push origin testing <-- upload changes to the global repository (if you are prompted to do something else, do so)
-git pull origin testing <-- you can download the latest changes from the global repository to your computer
+git branch testing   # Create a new branch in the local repository called testing 
+git checkout testing  # Change from the current branch to testing branch (can be done whenever you want to change branches)
+git add new_file.cpp  # We add a new file in the testing branch
+git commit -m "added new_file.cpp to the testing branch"  # commit local repository
+git push origin testing   # upload changes to the global repository (if you are prompted to do something else, do so)
+git pull origin testing   # you can download the latest changes from the global repository to your computer
 ```
 3. If you want to merge a branch (eg testing) with the main branch 
 ```bash
-git checkout main<-- changes from the current branch to the main branch
-git merge testing <-- merge the testing branch with the main
+git checkout main   # changes from the current branch to the main branch
+git merge testing   # merge the testing branch with the main
 ```
 4. Delete a branch (eg testing, which would make sense after the merge) you have to do the next two steps
 ```bash
-git branch -d testing <-- locally clears the testing branch
-git push origin --delete testing <-- delete the testing branch in the global repository
+git branch -d testing   # locally clears the testing branch
+git push origin --delete testing   # delete the testing branch in the global repository
 ```
 When working with branches, many times you have lots of local branches that have been already merged in remote, but you still have them in local. To [delete them](https://stackoverflow.com/questions/7726949/remove-tracking-branches-no-longer-on-remote/28464339#28464339) (with a file review before you delete them):
 ```bash
@@ -148,10 +148,10 @@ git branch --merged >/tmp/merged-branches && vi /tmp/merged-branches && xargs gi
 ```
 5. Another good practice is to tag locate an important point of your code is to make a "tag". Typically this is done when you want to make a release.
 ```bash
-git tag <-- shows a list of all tags
-git show 1.0 <-- shows detailed tag information called v1.0
-git tag -a 1.0 -m "version 1.0: first release" <-- creates a tag named v1.0 in the local repository
-git push origin 1.0 <-- upload the tag to the remote server
+git tag   # shows a list of all tags
+git show 1.0   #shows detailed tag information called v1.0
+git tag -a 1.0 -m "version 1.0: first release"   # creates a tag named v1.0 in the local repository
+git push origin 1.0   # upload the tag to the remote server
 ```
 6. In some situations there can be conflicts. A conflict occurs when two developers have modified the same file at the same time and then server doesn't know which is the final version of the file. The conflicts usually appear after pulling a branch and are visible when you see the status:
 ```bash
@@ -205,7 +205,7 @@ git checkout 8af5d69e4bbc9aec8b5e268e2ba94c49fbffee37
 ```
 In case you have a repo with submodules, which are different subrepos within the main repo ([more info here](https://git-scm.com/book/en/v2/Git-Tools-Submodules)), you need to update them:
 ```bash
-git submodule update --recursive
+git submodule update --remote --merge
 ```
 
 ## Statistics
@@ -214,15 +214,15 @@ This [script](python/utilities/git_stats.py) has several statistics for GitHub r
 
 Statistics of commits:
 ```bash
-git rev-list HEAD --count <-- allows you to see the total number of commits
-git shortlog -sne <-- allows seeing the number of commits of each developer
+git rev-list HEAD --count   # allows you to see the total number of commits
+git shortlog -sne   # allows seeing the number of commits of each developer
 ```
 Count number of lines. Some of the following statistics are computed with [CLOC](https://github.com/AlDanial/cloc) using `npm install -g cloc`. An alternative to CLOC is [linguistic](https://github.com/github/linguist), which is the library used by GitHub to get code statistics:
 ```bash
-git ls-files | xargs cat | wc -l <-- total number of lines (including comments)
-git ls-files | xargs wc -l <-- number of lines per file
-cloc --vcs=git <-- number of files and code statistics (code, blanks and comments)
-cloc --git --diff b35dfc0866bce3bcf284b9eeecf3fa50b54a9691 HEAD <- differences in code statistics of a commit and current main
+git ls-files | xargs cat | wc -l   # total number of lines (including comments)
+git ls-files | xargs wc -l   # number of lines per file
+cloc --vcs=git   # number of files and code statistics (code, blanks and comments)
+cloc --git --diff b35dfc0866bce3bcf284b9eeecf3fa50b54a9691 HEAD   # differences in code statistics of a commit and current main
 ```
 Statistics of number of lines per developer:
 ```bash
@@ -238,7 +238,7 @@ git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objec
 ```
 Other statistics:
 ```
-git ls-remote --heads origin | wc -l <-- number of active branches
+git ls-remote --heads origin | wc -l   # number of active branches
 ```
 
 ## Other commands
@@ -263,6 +263,5 @@ git revert <commit hash>   # Reverts a commit hash
 git fetch origin   
 git reset --hard origin/main
 ```
-
 
 Happy gitting!
