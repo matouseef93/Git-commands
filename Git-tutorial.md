@@ -1,4 +1,4 @@
-This is a basic tutorial of git. A more advanced one can be found [here](http://git-scm.com/book). This tutorial is based on this [Spanish version](http://asrob.uc3m.es/index.php/Tutorial_git) that I created many years ago.
+This is a basic tutorial on git. A more advanced one can be found [here](http://git-scm.com/book). 
 
 Git is a version control software designed by Linus Torvalds, designed with the efficiency and reliability of maintaining application versions when there is a large number of source files. At first, Git was thought of as a low-level engine on which others could write the user interface or front end. However, Git has since become a fully functional version control system. There are some very relevant projects that already use Git, in particular, the [Linux kernel](https://github.com/torvalds/linux).
 
@@ -10,7 +10,7 @@ The first step is to be able to download a repository, add files and send these 
 ```bash
 sudo apt-get install git
 ```
-2.a. Next you will have to download the repository on which you are going to work. By default it downloads the last revision ("HEAD").
+2.a. Next, you will have to download the repository on which you are going to work. By default, it downloads the last revision (`HEAD`).
 ```bash
 git clone https://github.com/miguelgfierro/codebase
 ```
@@ -64,7 +64,7 @@ git commit -m "I have improved my Git level!"
 ```
 *Tips and tricks: You can do `$ git commit -a -m = "I have improved my Git level!"`, this also uploads files marked as modified, without having to re-do `git add`*.
 
-7. Finally you have to upload the changes to the global repository. In order to do this the administrator has to give you permission. You are going to push to branch `master`, which is the initial branch available when the repo is created.
+7. Finally you have to upload the changes to the global repository. In order to do this, the administrator has to give you permission. You are going to push to branch `master`, which is the initial branch available when the repo is created.
 ```bash
 git push origin master
 ```
@@ -79,7 +79,7 @@ Initial settings to enter your name and email (git will advise if necessary). To
 git config --global user.name "Bruce Wayne"
 git config --global user.email iambatman@users.noreply.github.com
 ```
-*Tips and tricks: the alias `your-github-username@users.noreply.github.com` is a your default hidden email in Github*.
+*Tips and tricks: the alias `your-github-username@users.noreply.github.com` is your default hidden email in GitHub*.
 
 To configure your user in a single repository:
 ```bash
@@ -94,7 +94,7 @@ git config user.email
 
 ## Basic management of branches
 
-The branches are used to develop in parallel to the main repository. When you create a new functionality in the code, you should create a branch. Then you develop the functionality, test it and when it **works perfectly** is integrated into the main branch (which is usually the master branch).
+The branches are used to develop in parallel to the main repository. When you create new functionality in the code, you should create a branch. Then you develop the functionality, test it and when it **works perfectly** is integrated into the main branch (which is usually the master branch).
 
 *Tips and tricks: In master there should always be working code, please don't be the guy who sends breaking code to master, karma will hunt you!*
 
@@ -166,8 +166,8 @@ git checkout new_branch
 git stash pop
 ```
 
-## Roll back to a previos version of the repo
-In git is easy to roll back to a previous version of your repo, for that we only need the identifier of the commit. First we need to find the commit we want to roll back:
+## Roll back to a previous version of the repo
+In git is easy to roll back to a previous version of your repo, for that we only need the identifier of the commit. First, we need to find the commit we want to roll back:
 ```bash
 git log
 # commit 8af5d69e4bbc9aec8b5e268e2ba94c49fbffee37 <- this is the commit hash
@@ -184,7 +184,7 @@ To roll back to a specific commit:
 ```bash
 git checkout 8af5d69e4bbc9aec8b5e268e2ba94c49fbffee37 
 ```
-In case you have a repo with submodules, which are different subrepos whithin the main repo ([more info here](https://git-scm.com/book/en/v2/Git-Tools-Submodules)), you need to update them:
+In case you have a repo with submodules, which are different subrepos within the main repo ([more info here](https://git-scm.com/book/en/v2/Git-Tools-Submodules)), you need to update them:
 ```bash
 git submodule update --recursive
 ```
@@ -196,7 +196,7 @@ This [script](python/utilities/git_stats.py) has several statistics for GitHub r
 Statistics of commits:
 ```bash
 git rev-list HEAD --count <-- allows you to see the total number of commits
-git shortlog -sne <-- allows to see the number of commits of each developer
+git shortlog -sne <-- allows seeing the number of commits of each developer
 ```
 Count number of lines. Some of the following statistics are computed with [CLOC](https://github.com/AlDanial/cloc) using `npm install -g cloc`. An alternative to CLOC is [linguistic](https://github.com/github/linguist), which is the library used by GitHub to get code statistics:
 ```bash
