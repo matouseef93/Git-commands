@@ -229,16 +229,24 @@ Host personal
 HostName github.com
 User git
 IdentityFile ~/.ssh/ssh_personal
+IdentitiesOnly yes
 
 Host work
 HostName github.com
 User git
 IdentityFile ~/.ssh/ssh_work
+IdentitiesOnly yes
 ```
+*NOTE: You want to include the option `IdentitiesOnly yes` to prevent the use of default ids, so the commit is identified with the associated SSH file*
 5. Clone each repo using the host instead of `gitub.com` in `git@github.com:miguelgfierro/codebase.git`
 ```
 $ git clone git@personal:miguelgfierro/codebase.git
 $ git clone git@work:miguelgfierro/codebase.git
+```
+6. (Optional) If instead of cloning a repo, you want to use an already cloned repo, then you just need to change the remote
+```bash
+# git remote set-url origin git@<host-in-ssh-config>:<username>/<repo>
+$ git remote set-url origin git@personal:miguelgfierro/codebase.git
 ```
 
 ## Statistics
