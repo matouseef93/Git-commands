@@ -149,9 +149,16 @@ git branch --merged >/tmp/merged-branches && vi /tmp/merged-branches && xargs gi
 5. Another good practice is to tag locate an important point of your code is to make a "tag". Typically this is done when you want to make a release.
 ```bash
 git tag   # shows a list of all tags
-git show 1.0   #shows detailed tag information called v1.0
+git show 1.0   # shows detailed tag information called v1.0
 git tag -a 1.0 -m "version 1.0: first release"   # creates a tag named v1.0 in the local repository
 git push origin 1.0   # upload the tag to the remote server
+```
+Let's say you want to rename the tag from 1.0 to 0.99:
+```bash
+git tag -a 0.99 1.0^{} -m "Renamed tag 1.0 to 0.99"   # git tag -a new old^{} -m "my message"
+git tag -d 1.0   # git tag -d old (This removed the tag locally)
+git push origin 0.99 :1.0   # git push origin new :old (The : removes the tag from the remote repository)
+git pull --prune --tags   # Remove the deleted tag locally for all people that have the repo
 ```
 6. In some situations there can be conflicts. A conflict occurs when two developers have modified the same file at the same time and then server doesn't know which is the final version of the file. The conflicts usually appear after pulling a branch and are visible when you see the status:
 ```bash
