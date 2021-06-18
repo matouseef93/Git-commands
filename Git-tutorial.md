@@ -153,6 +153,12 @@ git show 1.0   # shows detailed tag information called v1.0
 git tag -a 1.0 -m "version 1.0: first release"   # creates a tag named v1.0 in the local repository
 git push origin 1.0   # upload the tag to the remote server
 ```
+To remove a tag:
+```bash
+git tag -d 1.0  # Removes tag locally
+git push --delete origin 1.0  # Removes the tag from the remote repository
+git pull --prune --tags   # Remove the deleted tag locally for all people that have the repo
+```
 Let's say you want to rename the tag from 1.0 to 0.99:
 ```bash
 git tag -a 0.99 1.0^{} -m "Renamed tag 1.0 to 0.99"   # git tag -a new old^{} -m "my message"
